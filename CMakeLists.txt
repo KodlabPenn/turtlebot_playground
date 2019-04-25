@@ -1,6 +1,6 @@
 # MIT License (modified)
 
-# Copyright (c) 2018 The Trustees of the University of Pennsylvania
+# Copyright (c) 2019 The Trustees of the University of Pennsylvania
 # Authors:
 # Vasileios Vasilopoulos <vvasilo@seas.upenn.edu>
 # Rosalind Shinkle <rshinkle@seas.upenn.edu>
