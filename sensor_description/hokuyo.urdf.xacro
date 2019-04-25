@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+
+<!--
+MIT License (modified)
+Copyright (c) 2018 The Trustees of the University of Pennsylvania
+Authors:
+Rosalind Shinkle <rshinkle@seas.upenn.edu>
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this **file** (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+-->
+
+<robot name="sensor_hokuyo" xmlns:xacro="http://ros.org/wiki/xacro">
+  <xacro:include filename="$(find turtlebot_playground)/sensor_description/plugins.urdf.xacro"/>
+  <xacro:include filename="$(find turtlebot_description)/urdf/turtlebot_properties.urdf.xacro"/>
+  
+  <xacro:property name="hokuyo_py" value="0.0"/>
+  <xacro:property name="hokuyo_px" value="0.0"/>
+  <xacro:property name="hokuyo_pz" value="0.437400"/> <!--"0.427200" -->
+  <!-- Parameterised in part by the values in turtlebot_properties.urdf.xacro -->
+  <xacro:macro name="sensor_hokuyo" params="parent">
+    <joint name="hokuyo_joint" type="fixed">
+      <origin xyz="${hokuyo_px} ${hokuyo_py} ${hokuyo_pz}" rpy="0 0 0"/>
+      <parent link="${parent}"/>
+      <child link="hokuyo_link"/>
+    </joint>
+    <!-- <link name="hokuyo_frame"/> -->
+
+    <link name="hokuyo_link">
+      <visual>
+       <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+         <mesh filename="package://turtlebot_playground/meshes/hokuyo.dae"/>
+        </geometry>
+      </visual>
+  	  <collision>
+        <origin xyz="0.0 0.0 0.0" rpy="0 0 0"/>
+  	    <geometry>
+  	      <box size="0.06 0.06 0.09"/>
+  	    </geometry>
+  	  </collision>
+      <inertial>
+        <mass value="0.4" />
+        <origin xyz="0 0 0" />
+        <inertia ixx="0.00039" ixy="0.0" ixz="0.0"
+                 iyy="0.00039" iyz="0.0"
+                 izz="0.00024" />
+      </inertial>
+    </link>
+	
+	<!-- Hokuyo sensor for simulation - Ros note: comes from the loaded urdf xacros at the top - this is where the sensor info goes-->
+	<turtlebot_sim_hokuyo/>
+  </xacro:macro>
+</robot>

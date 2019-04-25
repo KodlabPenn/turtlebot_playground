@@ -1,0 +1,49 @@
+<!--
+MIT License (modified)
+Copyright (c) 2018 The Trustees of the University of Pennsylvania
+Authors:
+Vasileios Vasilopoulos <vvasilo@seas.upenn.edu>
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this **file** (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+-->
+
+<launch>
+    <!-- ARGUMENTS FOR MAIN NODE (shell_navigation.py) -->
+    <!-- Define publisher topics -->
+    <arg name="pub_twist_topic"             default="/mobile_base/commands/velocity"/>                               <!-- Topic for twist commands - CHECK YOUR PLATFORM -->
+    <arg name="pub_fs_topic"                default="freespace_polygon"/>                <!-- Topic for polygon freespace visualization -->
+
+    <!-- Define subscriber topics -->
+    <arg name="sub_robot_topic"             default="/odom"/>                       <!-- Robot odometry - CHECK YOUR STATE ESTIMATOR -->
+    <arg name="sub_laser_topic"             default="/scan"/>                              <!-- LaserScan topic - CHECK YOUR SENSOR TOPIC OR DEPTHMAP TO LIDAR CONVERTER -->
+
+    <!-- Define frame IDs -->
+    <arg name="world_frame_id"              default="/odom"/>     <!-- maybe base_frame?-->              <!-- World frame ID in tf - CHECK YOUR STATE ESTIMATOR -->
+    <arg name="laser_frame_id"              default="/hokuyo_link"/>                         <!-- LIDAR frame ID in tf - CHECK YOUR SENSOR TOPIC OR DEPTHMAP TO LIDAR CONVERTER -->
+
+
+    <!-- Launch main node and assign appropriate parameters -->
+    <node name="shell_navigation_node" pkg="turtlebot_playground" type="shell_navigation.py" ns="reactive_planner" output="screen">
+        <!-- ARGUMENT PARAMETERS -->
+        <param name="pub_twist_topic"                   value="$(arg pub_twist_topic)"/>
+        <param name="sub_laser_topic"                   value="$(arg sub_laser_topic)"/>
+        <param name="sub_robot_topic"                   value="$(arg sub_robot_topic)"/>
+        <param name="world_frame_id"                    value="$(arg world_frame_id)"/>
+        <param name="laser_frame_id"                    value="$(arg laser_frame_id)"/>
+
+    </node>
+
+</launch>
