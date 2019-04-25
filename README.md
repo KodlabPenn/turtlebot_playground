@@ -2,7 +2,7 @@
 
 Welcome to Turtlebot Playground! This is a Gazebo environment for testing out path planning methods on the Turtlebot in simulation.
 
-Maintainer: Rosalind Shinkle <rshinkle@seas.upenn.edu>
+Maintainer: Rosalind Shinkle (<rshinkle@seas.upenn.edu>)
 
 ## Prerequisites
 1. You must have at least Gazebo 8, which requires at least ROS Melodic, to run this code - you will also need basic Python packages like numpy, scipy, shapely, etc. - if you don't have these packages, trying to run point navigation will fail, and the error will tell you which package to install. 
