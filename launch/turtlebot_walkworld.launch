@@ -42,6 +42,10 @@ SOFTWARE.
     <arg name="3d_sensor" value="$(arg 3d_sensor)"/>
   </include>
 
+  <!-- Gazebo model spawner -->
+  <node name="spawn_turtlebot_model" pkg="gazebo_ros" type="spawn_model"
+        args="-x 0 -y 0 -Y 0 -unpause -urdf -param robot_description -model mobile_base"/>
+
   <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher">
     <param name="publish_frequency" type="double" value="30.0" />
   </node>
