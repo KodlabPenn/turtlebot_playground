@@ -100,7 +100,7 @@ SOFTWARE.
           <material>
             <lighting>1</lighting>
             <script>
-              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <uri>package://turtlebot_playground/meshes/hokuyo.dae</uri>
               <name>Gazebo/Wood</name>
             </script>
           </material>
