@@ -53,6 +53,7 @@ find_package(catkin REQUIRED COMPONENTS
 )
 find_package(gazebo REQUIRED)
 find_package(Boost REQUIRED COMPONENTS system)
+find_package(Eigen3 REQUIRED)
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
@@ -73,14 +74,37 @@ catkin_package(
 
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
+set(MAIN_DIR ${CMAKE_SOURCE_DIR})
 include_directories(SYSTEM ${Boost_INCLUDE_DIRS} ${GAZEBO_INCLUDE_DIRS} src)
 include_directories(${catkin_INCLUDE_DIRS})
+include_directories(${Eigen_INCLUDE_DIRS})
+include_directories(${MAIN_DIR}/include)
 link_directories(${GAZEBO_LIBRARY_DIRS})
 list(APPEND CMAKE_CXX_FLAGS "${GAZEBO_CXX_FLAGS}")
 
 ## Declare a C++ library
 add_library(ActorCollisionsPlugin SHARED src/ActorCollisionsPlugin.cc)
 target_link_libraries(ActorCollisionsPlugin ${GAZEBO_LIBRARIES})
+
+# add_library(behavior_lib
+#   ${MAIN_DIR}/src/behavior.cpp
+#   ${MAIN_DIR}/src/controller.cpp
+# )
+# target_link_libraries(behavior_lib
+#   ${catkin_LIBRARIES}
+#   ${Boost_LIBRARIES}
+# )
+
+add_executable(navigation_node
+  ${MAIN_DIR}/src/navigation_node.cpp
+  ${MAIN_DIR}/src/behavior.cpp
+  ${MAIN_DIR}/src/controller.cpp
+)
+
+target_link_libraries(navigation_node
+  ${catkin_LIBRARIES}
+  ${Boost_LIBRARIES}
+)
 
 #############
 ## Install ##
