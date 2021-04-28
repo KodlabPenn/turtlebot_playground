@@ -26,12 +26,13 @@ SOFTWARE.
   <arg name="base"            value="$(optenv TURTLEBOT_BASE kobuki)"/> <!-- kobuki, create, roomba -->
   <arg name="battery"         value="$(optenv TURTLEBOT_BATTERY /proc/acpi/battery/BAT0)"/>  <!-- /proc/acpi/battery/BAT0 -->
   <arg name="stacks"          value="$(optenv TURTLEBOT_STACKS hexagons)"/>  <!-- circles, hexagons -->
- <!-- <arg name="3d_sensor"   value="$(optenv TURTLEBOT_3D_SENSOR hokuyo)"/> --> <!-- kinect, asus_xtion_pro -->
- <arg name="3d_sensor"        value="hokuyo_and_rgbcamera"/> <!-- note that this only works with kobuki and hexagons -->
+  <!-- <arg name="3d_sensor"  value="$(optenv TURTLEBOT_3D_SENSOR hokuyo)"/> --> <!-- kinect, asus_xtion_pro -->
+  <arg name="3d_sensor"       value="hokuyo_and_rgbcamera"/> <!-- note that this only works with kobuki and hexagons -->
 
- <arg name="pub_twist_topic"  default="/mobile_base/commands/velocity"/> <!-- Topic for twist commands - CHECK YOUR PLATFORM -->
- <arg name="sub_robot_topic"  default="/odom"/> <!-- Robot odometry - CHECK YOUR STATE ESTIMATOR -->
+  <arg name="pub_twist_topic" default="/mobile_base/commands/velocity"/> <!-- Topic for twist commands - CHECK YOUR PLATFORM -->
+  <arg name="sub_robot_topic" default="/odom"/> <!-- Robot odometry - CHECK YOUR STATE ESTIMATOR -->
 
+  <!-- Define the world file -->
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
     <arg name="use_sim_time" value="true"/>
     <arg name="debug" value="false"/>
@@ -39,6 +40,7 @@ SOFTWARE.
     <arg name="world_name" value="$(find turtlebot_playground)/worlds/obstacles1.world"/> 
   </include>
 
+  <!-- Turtlebot parameters -->
   <include file="$(find turtlebot_playground)/launch/includes/turtlebot.launch.xml">
     <arg name="base" value="$(arg base)"/>
     <arg name="stacks" value="$(arg stacks)"/>
